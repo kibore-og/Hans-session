@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEBASTIAN MD | PAIR CODE</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated background */
+    body::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: url('https://files.catbox.moe/2yarwr.png') repeat;
+      opacity: 0.1;
+      animation: rotate 60s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg) scale(1); }
+      to { transform: rotate(360deg) scale(1.2); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+    }
+
+    .box {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 30px;
+      padding: 40px 30px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3),
+                 0 0 0 2px rgba(255, 255, 255, 0.1) inset;
+      transform: translateY(0);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: float 6s ease-in-out infinite;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .box:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 35px 60px rgba(0, 0, 0, 0.4),
+                 0 0 0 3px rgba(255, 255, 255, 0.2) inset;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .header-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 25px;
+      font-size: 40px;
+      color: white;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    h3 {
+      color: white;
+      font-size: 24px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #fff, #e0e0e0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 14px;
+      margin-bottom: 25px;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-container {
+      display: flex;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50px;
+      padding: 5px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .input-container:focus-within {
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .input-container input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      padding: 15px 20px;
+      color: white;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .input-container input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 300;
+    }
+
+    .input-container input[type="number"]::-webkit-inner-spin-button,
+    .input-container input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .input-container button {
+      background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+      border: none;
+      padding: 0 30px;
+      border-radius: 50px;
+      color: white;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      font-size: 14px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .input-container button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #ff8787, #6cd5ce);
+    }
+
+    .input-container button:active {
+      transform: scale(0.95);
+    }
+
+    .status-message {
+      text-align: center;
+      color: white;
+      font-size: 14px;
+      margin: 20px 0;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #pair {
+      text-align: center;
+    }
+
+    #copy {
+      display: inline-block;
+      padding: 15px 30px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 18px !important;
+      margin-top: 15px;
+    }
+
+    #copy:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.05);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    #copy span {
+      color: #ff6b6b !important;
+      font-weight: 700;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 12px;
+      margin-top: 20px;
+      font-weight: 300;
+    }
+
+    .footer-note i {
+      color: #ff6b6b;
+      margin: 0 3px;
+    }
+
+    /* Loading animation */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 10px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsive design */
+    @media (max-width: 480px) {
+      .container {
+        padding: 10px;
+      }
+
+      .box {
+        padding: 30px 20px;
+      }
+
+      .input-container {
+        flex-direction: column;
+        background: transparent;
+        gap: 10px;
+      }
+
+      .input-container input {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 50px;
+        width: 100%;
+      }
+
+      .input-container button {
+        padding: 15px;
+        width: 100%;
+      }
+
+      h3 {
+        font-size: 20px;
+      }
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="box" id="box">
+      <div class="header-icon">
+        <i class="fas fa-bolt"></i>
+      </div>
+      
+      <h3>SEBASTIAN MD</h3>
+      <div class="subtitle">
+        <i class="fas fa-code"></i> Pair Code Scanner
+      </div>
+
+      <div class="input-wrapper">
+        <div class="input-container">
+          <input 
+            type="text" 
+            id="number" 
+            placeholder="255693xxxxxx" 
+            value=""
+          >
+          <button id="submit">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="status-message" id="waiting-message" style="display: none;">
+        <div class="loading"></div>
+        Please wait a while...
+      </div>
+
+      <div id="pair"></div>
+
+      <div class="footer-note">
+        <i class="fas fa-heart"></i> Coded by Rahmany <i class="fas fa-heart"></i>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
+  <script>
+    const pairDiv = document.getElementById("pair");
+    const submitBtn = document.getElementById("submit");
+    const numberInput = document.getElementById("number");
+    const waitingMsg = document.getElementById("waiting-message");
+    let timeoutId;
+
+    // Format phone number as user types
+    numberInput.addEventListener('input', (e) => {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length > 12) value = value.slice(0, 12);
+      
+      // Add spaces for better readability
+      if (value.length > 3) {
+        value = value.slice(0,3) + ' ' + value.slice(3);
+      }
+      if (value.length > 7) {
+        value = value.slice(0,7) + ' ' + value.slice(7);
+      }
+      
+      e.target.value = value;
+    });
+
+    async function copyCode() {
+      const copyElement = document.getElementById("copy");
+      const codeText = copyElement.innerText.replace('CODE: ', '');
+      
+      try {
+        await navigator.clipboard.writeText(codeText);
+        const originalText = copyElement.innerText;
+        copyElement.innerHTML = '<span style="color:#4ecdc4">✓ COPIED!</span>';
+        copyElement.style.transform = 'scale(1.1)';
+        
+        if (timeoutId) clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          copyElement.innerHTML = originalText;
+          copyElement.style.transform = 'scale(1)';
+        }, 1500);
+      } catch (err) {
+        console.error('Failed to copy:', err);
+      }
+    }
+
+    submitBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      
+      // Clear previous results
+      pairDiv.innerHTML = '';
+      
+      // Get raw number without spaces
+      const rawNumber = numberInput.value.replace(/\s/g, '');
+      
+      // Validation
+      if (!rawNumber) {
+        pairDiv.innerHTML = '<div class="status-message" style="color:#ff6b6b"><i class="fas fa-exclamation-circle"></i> Enter your WhatsApp number</div>';
+        return;
+      }
+      
+      if (rawNumber.length < 11) {
+        pairDiv.innerHTML = '<div class="status-message" style="color:#ff6b6b"><i class="fas fa-times-circle"></i> Invalid Phone Number</div>';
+        return;
+      }
+
+      // Show waiting message
+      waitingMsg.style.display = 'flex';
+      waitingMsg.style.justifyContent = 'center';
+      waitingMsg.style.alignItems = 'center';
+      
+      // Format display number
+      const displayNumber = '+' + rawNumber.replace(/(\d{3})(\d{3})(\d+)/, '$1 $2 $3');
+      numberInput.value = displayNumber;
+      numberInput.style.color = '#4ecdc4';
+      numberInput.style.fontWeight = 'bold';
+
+      try {
+        // Simulate API call - replace with your actual endpoint
+        // const { data } = await axios(`/code?number=${rawNumber}`);
+        // const code = data.code || "Service Unavailable";
+        
+        // Simulated response for demonstration
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        const code = Math.floor(100000 + Math.random() * 900000); // Random 6-digit code
+        
+        pairDiv.innerHTML = `
+          <div id="copy" onclick="copyCode()" style="animation: fadeIn 0.5s ease">
+            <span style="color:white">CODE: </span>
+            <span style="color:#4ecdc4; font-weight:700">${code}</span>
+            <br>
+            <small style="color:rgba(255,255,255,0.5); font-size:12px">click to copy</small>
+          </div>
+        `;
+      } catch (error) {
+        pairDiv.innerHTML = '<div class="status-message" style="color:#ff6b6b"><i class="fas fa-exclamation-triangle"></i> Service Unavailable</div>';
+      } finally {
+        waitingMsg.style.display = 'none';
+      }
+    });
+
+    // Allow Enter key to submit
+    numberInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        submitBtn.click();
+      }
+    });
+
+    // Add ripple effect to button
+    submitBtn.addEventListener('mousedown', (e) => {
+      const ripple = document.createElement('span');
+      ripple.style.position = 'absolute';
+      ripple.style.width = '20px';
+      ripple.style.height = '20px';
+      ripple.style.background = 'rgba(255,255,255,0.5)';
+      ripple.style.borderRadius = '50%';
+      ripple.style.transform = 'translate(-50%, -50%)';
+      ripple.style.pointerEvents = 'none';
+      ripple.style.animation = 'pulse 0.5s ease-out';
+      
+      const rect = submitBtn.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
+      
+      submitBtn.style.position = 'relative';
+      submitBtn.appendChild(ripple);
+      
+      setTimeout(() => {
+        ripple.remove();
+      }, 500);
+    });
+  </script>
+</body>
+</html>
